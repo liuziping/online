@@ -1,4 +1,4 @@
-#django
+django==1.11.8
 Pillow
 django-crispy-forms~=1.6.0
 django-import-export>=0.5.1
