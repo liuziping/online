@@ -13,8 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url,include
+from django.conf.urls import url, include
 from django.contrib import admin
+from django.views.static import serve
+from online.settings import MEDIA_ROOT
 from users.views import IndexView, RegisterView, ActiveUserView, LoginView, LogoutView, ForgetPwdView, ResetView
 
 
@@ -30,4 +32,9 @@ urlpatterns = [
     # url(r'^reset/(?P<active_code>.*)/$', ResetView.as_view(), name="reset_pwd"),  # 参数变量是否可以设置为可有可无呢？
     url(r'^reset/$', ResetView.as_view(), name="reset_pwd"), # 接受请求为 http://ip/reset/?code=1212
 
+    # 配置上传文件的访问处理函数
+    url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
+
+    # 富文本相关url
+    url(r'^ueditor/', include('DjangoUeditor.urls')),
 ]

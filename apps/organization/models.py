@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from django.db import models
-from DjangoUeditor.models import UEditorField
+from DjangoUeditor.models import UEditorField   # 意义不太大
 
 
 class CityDict(models.Model):
