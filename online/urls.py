@@ -32,6 +32,12 @@ urlpatterns = [
     # url(r'^reset/(?P<active_code>.*)/$', ResetView.as_view(), name="reset_pwd"),  # 参数变量是否可以设置为可有可无呢？
     url(r'^reset/$', ResetView.as_view(), name="reset_pwd"), # 接受请求为 http://ip/reset/?code=1212
 
+    # 课程机构url配置
+    url(r'^org/', include('organization.urls', namespace="org")),
+
+    # 教师url配置
+    url(r'^teacher/', include('teachers.urls', namespace="teacher")),
+
     # 配置上传文件的访问处理函数
     url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
 

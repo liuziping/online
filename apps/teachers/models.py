@@ -24,4 +24,4 @@ class Teacher(models.Model):
         return self.name
 
     # def get_course_nums(self):
-    #   return self.course_set.all().count()
+    #   return course_set.all().count()
