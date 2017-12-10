@@ -11,6 +11,7 @@ from django.core.urlresolvers import reverse
 
 from .forms import LoginForm, RegisterForm, ForgetForm, ModifyPwdForm
 from organization.models import CourseOrg
+from courses.models import Course
 from utils.email_send import send_code_email
 
 
@@ -31,12 +32,14 @@ class IndexView(View):
     def get(self, request):
         # 取出轮播图
         all_banners = Banner.objects.all().order_by('index')
-        # courses = Course.objects.filter(is_banner=False)[:6]
-        # banner_courses = Course.objects.filter(is_banner=True)[:3]
+        courses = Course.objects.filter(is_banner=False)[:6]
+        banner_courses = Course.objects.filter(is_banner=True)[:3]
         course_orgs = CourseOrg.objects.all()[:10]
         return render(request, 'index.html', {
                                 'all_banners': all_banners,
                                 'course_orgs': course_orgs,
+                                'courses': courses,
+                                'banner_courses': banner_courses,
                                 })
 
 

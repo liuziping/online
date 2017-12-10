@@ -2,6 +2,7 @@
 from datetime import datetime
 from django.db import models
 from users.models import UserProfile
+from courses.models import Course
 
 
 class UserMessage(models.Model):
@@ -23,4 +24,28 @@ class UserFavorite(models.Model):
 
     class Meta:
         verbose_name = u"用户收藏"
+        verbose_name_plural = verbose_name
+
+
+class UserCourse(models.Model):
+    user = models.ForeignKey(UserProfile, verbose_name=u"用户")
+    course = models.ForeignKey(Course, verbose_name=u"课程")
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
+
+    class Meta:
+        verbose_name = u"用户课程"
+        verbose_name_plural = verbose_name
+
+
+class CourseComments(models.Model):
+    """
+    课程评论
+    """
+    user = models.ForeignKey(UserProfile, verbose_name=u"用户")
+    course = models.ForeignKey(Course, verbose_name=u"课程")
+    comments = models.CharField(max_length=200, verbose_name=u"评论")
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
+
+    class Meta:
+        verbose_name = u"课程评论"
         verbose_name_plural = verbose_name
